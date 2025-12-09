@@ -76,7 +76,7 @@
         }
 
         /* =========================================================
-           NUEVO HEADER + NAVBAR (TRANSPARENTE MODERNO)
+           HEADER + NAVBAR (TRANSPARENTE MODERNO + LOGO DINÁMICO)
         ========================================================= */
 
         header {
@@ -97,52 +97,48 @@
             padding: 12px 0;
         }
 
+        /* Layout del nav con centro real */
         nav {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            position: relative;
+            display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            min-height: 60px;
         }
 
-        /* Caja del logo para que siempre se lea sobre fondo hero */
-        .logo-box {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 12px;
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(255,255,255,0.6);
-            border-radius: 6px;
-            backdrop-filter: blur(6px);
+        /* Logo sin contenedor */
+        .logo-img {
+            max-height: 80px;
+            width: auto;
+            display: block;
             transition: var(--transition);
         }
 
-        header.scrolled .logo-box {
-            background: var(--white);
-            border-color: rgba(0,0,0,0.06);
-        }
-
-        /* Clase para la imagen del logo */
-        .logo-img {
-            max-height: 52px;
-            width: auto;
-            display: block;
-        }
-
+        /* Centro real del menú */
         .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             justify-content: center;
+            width: max-content;
+            pointer-events: none; /* evita conflictos con el layout */
+        }
+
+        .nav-center .nav-links {
+            pointer-events: auto;
         }
 
         .nav-links {
             display: flex;
             gap: 32px;
             align-items: center;
-            padding: 8px 14px;
             border-radius: 999px;
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.12);
             backdrop-filter: blur(6px);
             transition: var(--transition);
+            padding: 12px 30px;
         }
 
         header.scrolled .nav-links {
@@ -227,7 +223,7 @@
         }
 
         /* =========================================================
-           NUEVO HERO (100vh, MÁS LIMPIO)
+           HERO (100vh, LIMPIO)
         ========================================================= */
 
         .hero {
@@ -237,14 +233,13 @@
                     rgba(10, 21, 41, 0.55),
                     rgba(10, 21, 41, 0.55)
                 ),
-                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+                url('./rosario_bg3.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             text-align: center;
             position: relative;
-            /* Ya no necesitamos margin-top porque el header ahora flota sobre el hero */
             margin-top: 0;
         }
 
@@ -283,14 +278,13 @@
             font-weight: 300;
         }
 
-        /* CTA del hero un poco más “premium clean” */
         .hero .btn-primary {
             border-radius: 4px;
         }
 
         /* --- QUIÉNES SOMOS --- */
         .about-section {
-            padding: 120px 0;
+            padding: 80px 0;
             background-color: var(--white);
         }
 
@@ -303,11 +297,11 @@
 
         .about-image {
             height: 550px;
-            background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1632&auto=format&fit=crop'); /* Sala de reuniones moderna */
+            background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1632&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             border-radius: 2px;
-            box-shadow: 20px 20px 0px var(--navy-dark); /* Sombra sólida estilo arquitectónico */
+            box-shadow: 20px 20px 0px var(--navy-dark);
         }
         
         .about-text h2 {
@@ -324,7 +318,6 @@
             font-size: 1.05rem;
         }
 
-        /* Grid de valores modernizado */
         .values-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -363,7 +356,6 @@
             position: relative;
         }
 
-        /* Elemento decorativo */
         .areas-section::before {
             content: '';
             position: absolute;
@@ -398,7 +390,7 @@
         }
 
         .area-card {
-            background-color: rgba(255, 255, 255, 0.03); /* Transparencia sutil */
+            background-color: rgba(255, 255, 255, 0.03);
             padding: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: var(--transition);
@@ -409,7 +401,6 @@
             transform: translateY(-5px);
         }
 
-        /* Cambio de color al hover: Todo se vuelve oscuro */
         .area-card:hover h3 { color: var(--navy-dark); }
         .area-card:hover li { color: var(--text-gray); }
         .area-card:hover li::before { color: var(--navy-dark); }
@@ -434,7 +425,7 @@
             content: '•';
             position: absolute;
             left: 0;
-            color: var(--white); /* Punto blanco */
+            color: var(--white);
             transition: var(--transition);
         }
 
@@ -472,7 +463,7 @@
 
         .contact-item i {
             color: var(--white);
-            margin-top: 5px;
+            margin-top: 0px;
             font-size: 1.2rem;
         }
         
@@ -492,26 +483,35 @@
             font-size: 1.1rem;
         }
 
+        /* Botón WhatsApp en contacto */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
+            text-decoration: underline;
+        }
+
+        /* Contenedor del mapa real */
         .map-box {
-            background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1748&auto=format&fit=crop'); /* Mapa abstracto o ciudad oscura */
-            background-size: cover;
-            background-position: center;
             width: 100%;
             height: 100%;
             min-height: 300px;
-            filter: grayscale(100%) contrast(1.2); /* Efecto mapa elegante */
-            border: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.02);
         }
-        
-        .map-marker {
-            background: var(--navy-dark);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
+
+        .map-box iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            border: 0;
+            display: block;
+            filter: grayscale(15%) contrast(1.05);
         }
 
         .copyright {
@@ -523,19 +523,44 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .hero h1 { font-size: 2.6rem; }
             .hero p { font-size: 1.05rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 40px; }
-            .nav-links { display: none; } 
-            .about-image { display: none; }
-            .logo-img { max-height: 46px; }
-            nav {
-                grid-template-columns: auto 1fr;
+
+            /* 1) En responsive: mantenemos imagen y la estilizamos */
+            .about-grid { 
+                grid-template-columns: 1fr; 
+                gap: 35px;
             }
+
+            .about-image {
+                order: 2; 
+            }
+
+            .about-text {
+                order: 1;
+            }
+
+            .about-image {
+                height: 320px;
+                border-radius: 8px;
+                box-shadow: 0 12px 30px rgba(10, 21, 41, 0.18);
+            }
+
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+
+            .nav-links { display: none; } 
+            .logo-img { max-height: 46px; }
+
+            /* En mobile, sacamos centrado absoluto */
+            .nav-center {
+                position: static;
+                transform: none;
+                width: auto;
+                pointer-events: auto;
+            }
+
             .nav-cta {
-                justify-self: end;
                 padding: 10px 16px;
                 font-size: 0.8rem;
             }
@@ -548,10 +573,19 @@
     <header id="site-header">
         <div class="container">
             <nav>
-                <a href="#inicio" class="logo-box">
-                    <img src="logo.jpeg" alt="Bobrosky Reitich & Asociados" class="logo-img">
+                <!-- Logo SIN contenedor -->
+                <a href="#inicio">
+                    <img 
+                        id="brand-logo"
+                        src="logo_white.png"
+                        data-logo-white="logo_white.png"
+                        data-logo-dark="logo.png"
+                        alt="Bobrosky Reitich & Asociados"
+                        class="logo-img"
+                    >
                 </a>
 
+                <!-- Menú centrado real -->
                 <div class="nav-center">
                     <ul class="nav-links">
                         <li><a href="#inicio">Inicio</a></li>
@@ -561,7 +595,7 @@
                     </ul>
                 </div>
 
-                <a href="#contacto" class="nav-cta">
+                <a href="https://wa.me/5493416226964" target="_blank" class="nav-cta">
                     <i class="fab fa-whatsapp"></i>
                     Agendar consulta
                 </a>
@@ -702,11 +736,20 @@
                             </div>
                         </div>
 
+                        <!-- 3) WhatsApp como botón -->
                         <div class="contact-item">
                             <i class="fab fa-whatsapp"></i>
                             <div>
                                 <strong>Teléfono / WhatsApp</strong>
-                                <span>+54 9 3416 22-6964</span>
+                                <a 
+                                    class="whatsapp-btn"
+                                    href="https://wa.me/5493416226964"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <i class="fab fa-whatsapp"></i>
+                                    +54 9 3416 22-6964
+                                </a>
                             </div>
                         </div>
 
@@ -720,8 +763,14 @@
                     </div>
                 </div>
 
+                <!-- 2) Iframe real de Google Maps -->
                 <div class="map-box">
-                    <div class="map-marker">Sarmiento 432</div>
+                    <iframe
+                        title="Mapa - Sarmiento 432, Rosario"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=Sarmiento%20432%2C%20Rosario&output=embed">
+                    </iframe>
                 </div>
 
             </div>
@@ -733,14 +782,22 @@
     </footer>
 
     <script>
-        // Header transparente -> sólido al hacer scroll
+        // Header transparente -> sólido al hacer scroll + cambio de logo
         const header = document.getElementById("site-header");
+        const logo = document.getElementById("brand-logo");
+
+        const logoWhite = logo.getAttribute("data-logo-white");
+        const logoDark = logo.getAttribute("data-logo-dark");
 
         function toggleHeader() {
-            if (window.scrollY > 20) {
+            const scrolled = window.scrollY > 20;
+
+            if (scrolled) {
                 header.classList.add("scrolled");
+                if (logo && logoDark) logo.src = logoDark;
             } else {
                 header.classList.remove("scrolled");
+                if (logo && logoWhite) logo.src = logoWhite;
             }
         }
 
